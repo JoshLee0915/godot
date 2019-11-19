@@ -192,9 +192,10 @@ int LWSServer::get_peer_port(int p_peer_id) const {
 }
 
 void LWSServer::disconnect_peer(int p_peer_id, int p_code, String p_reason) {
-	ERR_FAIL_COND(!has_peer(p_peer_id));
+    Ref<WebSocketPeer> peer = get_peer(p_to);
+    ERR_FAIL_COND(peer.is_null());
 
-	get_peer(p_peer_id)->close(p_code, p_reason);
+    peer->close(p_code, p_reason);
 }
 
 LWSServer::LWSServer() {
